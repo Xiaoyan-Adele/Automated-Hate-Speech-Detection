@@ -1,1 +1,1 @@
-# Hertie-School-Python-Project-Automated-Hate-Speech-Detection
+# Automated-Hate-Speech-Detection
