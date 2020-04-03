@@ -1,0 +1,3 @@
+1. don't dive furhter into baseline classifier because you don't have the time for that
+2. direct start with biulding the deep learning architecture
+3. the valuation is embedded in the model and thus it will be there no matter you give additional efforts or not 
