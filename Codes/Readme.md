@@ -1,17 +1,62 @@
 
-# Code Documentations
-## Data and Data Pre-processing
-we first set up the necessary libraries (nltk, pandas, numpy, re and string) and download the relevant packages ('stopwords',and 'punkt') to Google Colab. 
+# Code Documentations (brief)
 
-Then we uploaded the corpus file into Colab and get the column of tweets by applying pandas dataframe iloc function (however, later on this project realised that the indexed csv can just use loc to select the columns) and named this column tweets_pd_raw. We inspected the first five rows of the selected dataset so as to get a general idea of our data structure.
+## 1. Setting up
 
-Before applying any machine learning models, our project first inspects the data and making sure that they are feasible for analysis. We relied mostly on the NLTK library for text preprocessing. We replaced the URLs, excessive white spaces and mentions with a single gap. Then we tokenized the text and remove punctuations and set to lowercase. After that, this project stemmed the tokenized text and pasted the preprocessed text back to the labelled dataset. Now the preprocessed dataset is renamed as df_tweets. Again we inspected the first five rows of the selected dataset to ensure that the preprocessing generate our desired output.
+I installed Pytorch as well as some other useful libraries in preparation for the coming preprocessing, model construction and results visualization
 
-## Feature Generation and Initial Attempt to Build the RNN Classifier (LSTM)
-In this section, we rely mainly on the sklearn and karas libraries to perform the deep learning model training. At this point, we have not encountered computing capacity problems but high chances are, the future training will be moved to other cloud GPU service such as the Amazon AWS. 
+Those libraaies could be categorized into four corresponding groups.
 
-By the time of the midterm report, we complete the Tfidf vectorization with the sklearn library and also split the preprocessed dataset into training and testing. The testing accounts for 30% of the complete data. However, this project believe that for better tuning of the final model, it worth spliting the dataset further into at four: training, tuning, development and test. We will explore the feasibility of this data seperation in the post-midterm report period. 
+---
 
-Reference:
-As a duplication work, this project would like to mention the code that it consulted. Code suggestion by Alison and Maximilian on our piazza forum give me great help in understanding csv input for NLP data cleaning. During the preprocessing, we modeled mostly the repository for "Automated Hate Speech Detection and the Problem of Offensive Language." by Thomas Davidson, Dana Warmsley, Michael Macy, and Ingmar Weber. When it comes to dataset spliting and 
-RNN model construction, we looked at the repository by unnathi10. 
+## 2. Load the corpus file form Google Drive into Colab
+
+Since the LSTM classifier is operated in the Colab environment, I uploaded the dataset "labeled_data.csv" into drive folder and open it with pandas as a dataframe. Then I inspected the un-preprocessed text to get a sense of what to expect after the preprocessing. In the meanwhile, I also check the distribution of labels to see if the dataset is very biased towards "hate speech" or not.
+
+---
+
+##3. Preprocessing: 
+
+**replace, tokenize sentences and words, remove stopwords, & lemmatizer**
+
+With the re library, I removed mentions, punctuations, numbers, excessive white space.
+
+Then I converted the tweets into lowercase and split sentences
+
+After that, the tweets were lemmatized keeping only nones, adjectives, verbs and adverbs using the spacy library.
+
+Onwards, I defined a remove_stopwords function which filtered out all stopwords contained in the nltk library. 
+
+After finishing the text preprocessing, I printed out again the ten first row of the csv file to inspect the outcome. 
+
+The following code consulted the article *Build Your First Text Classification model using PyTorch* by Aravind Pai (source:https://www.analyticsvidhya.com/blog/2020/01/first-text-classification-in-pytorch/)  
+
+**Preparing input and output sequences**
+
+I built the vocabulary for the text and converted them into integer sequences （embedding). Vocabulary contained the unique words in the entire text. Each unique word is assigned an index. 
+
+Then we created an interator using in the BucketIterator form to format the embeddings into mini batches and paded them into the same length.  
+
+---
+# 4. Constructing a LSTM Model
+
+Basic Steps of LSTM:
+
+1. Create LSTM model with
+2. Instantiate Model
+3. Instantiate Loss Function
+4. Instantiate Optimizer
+5. Training the Model
+
+---
+## 5. Analysing the Model
+
+In the training part, we already print out the training loss and training accuracy for each epoch.
+
+In the validation stage, I first loaded the best model and define the inference function  that accepts the user defined input and **make predictions**. 
+
+---
+
+## 6. Model Comparison
+
+In a the codebook Baseline Model.ipynb, one can fine the code for constructing the baseline model using the Naive Bayer. 
