@@ -14,7 +14,7 @@ Those libraaies could be categorized into four corresponding groups.
 Since the LSTM classifier is operated in the Colab environment, I uploaded the dataset "labeled_data.csv" into drive folder and open it with pandas as a dataframe. Then I inspected the un-preprocessed text to get a sense of what to expect after the preprocessing. In the meanwhile, I also check the distribution of labels to see if the dataset is very biased towards "hate speech" or not.
 
 ---
-##3. Preprocessing: 
+## 3. Preprocessing: 
 
 **replace, tokenize sentences and words, remove stopwords, & lemmatizer**
 
@@ -37,7 +37,7 @@ I built the vocabulary for the text and converted them into integer sequences ï¼
 Then we created an interator using in the BucketIterator form to format the embeddings into mini batches and paded them into the same length.  
 
 ---
-# 4. Constructing a LSTM Model
+## 4. Constructing a LSTM Model
 
 Basic Steps of LSTM:
 
